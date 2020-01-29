@@ -11,5 +11,9 @@ defmodule ChronalCalibrationTest do
     test "adds the sum of the variations to the inital frequency if variations are passed in" do
       assert ChronalCalibration.computed_frequency(0, [1, 3, -2]) == 2
     end
+
+    test "adds the sum of the variations taken from a file to the inital frequency when the file's path is passed in" do
+      assert ChronalCalibration.computed_frequency(0, "./test/sample.data") == 4
+    end
   end
 end
