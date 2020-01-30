@@ -33,6 +33,34 @@ defmodule ChronalCalibration do
     )
   end
 
+  def first_frequency_repeated(initial_frequency, frequency_variations_file_path) do
+    frequencies_history = MapSet.new([initial_frequency])
+    frequency_variations = extracted_frequency_variations(frequency_variations_file_path)
+
+    check_next_frequecy(initial_frequency, frequency_variations, frequencies_history)
+  end
+
+  defp check_next_frequecy(_current_frequency, [], _frequencies_history) do
+    {:error, :no_frequency_repeated}
+  end
+
+  defp check_next_frequecy(
+        current_frequency,
+        [
+          next_frequency_variation | rest_of_frequency_variations
+        ],
+        frequencies_history
+      ) do
+    next_frequency = current_frequency + next_frequency_variation
+
+    if MapSet.member?(frequencies_history, next_frequency) do
+      {:ok, next_frequency}
+    else
+      new_frequencies_history = MapSet.put(frequencies_history, next_frequency)
+      check_next_frequecy(next_frequency, rest_of_frequency_variations, new_frequencies_history)
+    end
+  end
+
   defp extracted_frequency_variations(source_file_path) do
     {:ok, file_content} = File.read(source_file_path)
 

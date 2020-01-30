@@ -13,7 +13,13 @@ defmodule ChronalCalibrationTest do
     end
 
     test "adds the sum of the variations taken from a file to the inital frequency when the file's path is passed in" do
-      assert ChronalCalibration.computed_frequency(0, "./test/sample.data") == 4
+      assert ChronalCalibration.computed_frequency(0, "./test/sample.data") == 3
+    end
+  end
+
+  describe "first_frequency_repeated/2" do
+    test "returns the first computed_frequency repeated twice" do
+      assert {:ok, 3} = ChronalCalibration.first_frequency_repeated(0, "./test/sample.data")
     end
   end
 end
