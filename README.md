@@ -2,9 +2,9 @@
 
 ChronalCalibration is a proposition of solution to [Chronal Calibration](https://adventofcode.com/2018/day/1) problem.
 
-My take is optimistic in the sense that I expect both the initial frequency and each data variation to be valid integers. Also, for step 2 I assume that the path to the file
-containing the data variations is correct.
-The code can be expanded to manage more complex cases.
+My take is optimistic in the sense that I expect both the initial frequency and each data variation to be valid integers. Also as the promblem state the computer may
+> need to repeat its list of frequency changes many times before a duplicate frequency is found The code can be expanded to manage more complex cases.
+I will assume that at some point I will reach a repeated frequency (Otherwise the we would run into an infinit loop)
 
 ## Setup
 
@@ -28,24 +28,17 @@ run
 
 ```
 $ iex -S mix
-
-iex> ChronalCalibration.computed_frequency(1)
-1
-
-iex> ChronalCalibration.computed_frequency(1, [2, 3])
-6
-
-iex> ChronalCalibration.computed_frequency(0, [1, 3, -2])
-2
+iex> ChronalCalibration.computed_frequency(0, "./data/frequency_variations.data")
+435
 ```
-
 see [the module file](./lib/chronal_calibration.ex) for documentation.
 
 ### Step 2
 
+run
+
 ```
 $ iex -S mix
-iex> ChronalCalibration.computed_frequency(0, "./data/frequency_variations.data")
-435
+iex> ChronalCalibration.first_frequency_repeated(0, "./data/frequency_variations.data")
+245
 ```
-
