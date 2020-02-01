@@ -12,5 +12,9 @@ defmodule ChronalCalibrationTest do
     test "returns the first computed_frequency repeated twice if a frequency is repeated" do
       assert ChronalCalibration.first_frequency_repeated(0, "./test/sample.data") == 3
     end
+
+    test "loops data variations untill a frequency is found" do
+      assert ChronalCalibration.first_frequency_repeated(0, "./test/sample_requiring_second_loop.data") == 0
+    end
   end
 end
